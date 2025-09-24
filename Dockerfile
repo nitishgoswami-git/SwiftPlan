@@ -15,6 +15,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /us
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+
 # Set working directory
 WORKDIR /app
 
