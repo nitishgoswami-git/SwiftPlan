@@ -26,10 +26,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4️⃣ Optional: deploy (example)
-      - name: Deploy
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      # 4️⃣ Install Render CLI
+      - name: Install Render CLI
         run: |
-          echo "Ready to deploy your Flask app..."
+          curl -fsSL https://cli.render.com/install.sh | sh
+
+      # 5️⃣ Deploy to Render
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          render deploy service --service-id srv-d39us595pdvs73bopff0 --wait
